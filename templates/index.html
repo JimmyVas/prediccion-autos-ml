@@ -158,8 +158,6 @@ Estimación basada en modelo Random Forest entrenado con datos de autos usados.
 
 <hr>
 
-<h5>Perfil del vehículo (nivel dentro del rango)</h5>
-
 <canvas id="variablesChart"></canvas>
 
 </div>
@@ -184,11 +182,16 @@ width:'100%'
 });
 });
 
+let chart;
+
+window.onload = function(){
+
 const ctx = document.getElementById('variablesChart').getContext('2d');
 
-let chart = new Chart(ctx, {
+chart = new Chart(ctx,{
 
 type:'bar',
+
 
 data:{
 
@@ -198,7 +201,7 @@ labels:[
 'Doors',
 'Highway MPG',
 'Vehicle Age'
-]
+],
 
 datasets:[{
 label:'Nivel dentro del rango (%)',
@@ -227,6 +230,11 @@ text:'Porcentaje del rango máximo'
 
 });
 
+
+updateChart()
+
+}
+
 function updateChart(){
 
 let hp = document.querySelector('[name="hp"]').value || 0
@@ -249,9 +257,12 @@ chart.update()
 
 }
 
-document.querySelectorAll("input").forEach(input=>{
-input.addEventListener("input", updateChart)
+document.querySelectorAll("input, select").forEach(el=>{
+el.addEventListener("input", updateChart)
+el.addEventListener("change", updateChart)
 })
+
+updateChart()
 
 </script>
 
