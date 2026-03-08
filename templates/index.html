@@ -182,25 +182,44 @@ width:'100%'
 const ctx = document.getElementById('variablesChart').getContext('2d');
 
 let chart = new Chart(ctx, {
+
 type:'bar',
+
 data:{
+
 labels:[
 'Engine HP',
 'Cylinders',
 'Doors',
 'Highway MPG',
-'Popularity',
 'Vehicle Age'
 ],
+
 datasets:[{
-label:'Valores ingresados',
-data:[0,0,0,0,0,0],
+label:'Nivel dentro del rango (%)',
+data:[0,0,0,0,0],
 backgroundColor:'green'
 }]
+
 },
+
 options:{
-responsive:true
+
+responsive:true,
+
+scales:{
+y:{
+beginAtZero:true,
+max:100,
+title:{
+display:true,
+text:'Porcentaje del rango máximo'
 }
+}
+}
+
+}
+
 });
 
 function updateChart(){
@@ -209,16 +228,16 @@ let hp = document.querySelector('[name="hp"]').value || 0
 let cylinders = document.querySelector('[name="cylinders"]').value || 0
 let doors = document.querySelector('[name="doors"]').value || 0
 let mpg = document.querySelector('[name="mpg"]').value || 0
-let popularity = document.querySelector('[name="popularity"]').value || 0
 let age = document.querySelector('[name="age"]').value || 0
 
 chart.data.datasets[0].data=[
-hp,
-cylinders,
-doors,
-mpg,
-popularity,
-age
+
+(hp/700)*100,
+(cylinders/12)*100,
+(doors/5)*100,
+(mpg/60)*100,
+(age/30)*100
+
 ]
 
 chart.update()
