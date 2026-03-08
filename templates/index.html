@@ -94,7 +94,12 @@ GRUPO 1 - 🚗 Predicción de Precio de Autos
 <br>
 
 <label>Number of Doors</label>
-<input type="number" name="doors" class="form-control" value="{{doors}}" min="2" max="5">
+<select name="doors" class="form-control">
+<option value="2" {% if doors == 2 %}selected{% endif %}>2</option>
+<option value="3" {% if doors == 3 %}selected{% endif %}>3</option>
+<option value="4" {% if doors == 4 %}selected{% endif %}>4</option>
+<option value="5" {% if doors == 5 %}selected{% endif %}>5</option>
+</select>
 
 <br>
 
@@ -153,7 +158,7 @@ Estimación basada en modelo Random Forest entrenado con datos de autos usados.
 
 <hr>
 
-<h5>Valores ingresados</h5>
+<h5>Perfil del vehículo (nivel dentro del rango)</h5>
 
 <canvas id="variablesChart"></canvas>
 
@@ -193,7 +198,7 @@ labels:[
 'Doors',
 'Highway MPG',
 'Vehicle Age'
-],
+]
 
 datasets:[{
 label:'Nivel dentro del rango (%)',
